@@ -46,7 +46,7 @@ class _CoinScreenState extends State<CoinScreen> {
             );
 
             return RefreshIndicator(
-              onRefresh: () async => await priceListCubit.load(),
+              onRefresh: () async => await priceListCubit.load(true),
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),

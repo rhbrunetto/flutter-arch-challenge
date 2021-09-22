@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:crypto_challenge/modules/calculator/domain/models/coin_model.dart';
 import 'package:crypto_challenge/modules/calculator/domain/models/price_model.dart';
 import 'package:crypto_challenge/modules/calculator/domain/usecases/calculator_usecase.dart';
 
@@ -17,7 +18,7 @@ class CalculatorCubit extends Cubit<CalculatorState> {
     _priceModel = priceModel;
     emit(
       CalculatorLoaded(
-        coinName: priceModel.coinModel.name,
+        coin: priceModel.coinModel,
         valueInCoin: 1.0,
         valueInUsd: priceModel.priceInUsd,
       ),
@@ -33,10 +34,11 @@ class CalculatorCubit extends Cubit<CalculatorState> {
       newCoinValue,
     );
     emit(
-      CalculatorLoaded(
-        coinName: _priceModel!.coinModel.name,
+      CalculatorUpdated(
+        coin: _priceModel!.coinModel,
         valueInCoin: newCoinValue,
         valueInUsd: newUsdValue,
+        isCoinChanged: false,
       ),
     );
   }
@@ -45,15 +47,16 @@ class CalculatorCubit extends Cubit<CalculatorState> {
     final newUsdValue = double.tryParse(usdStringValue);
     if (newUsdValue == null) return;
     if (_priceModel == null) return;
-    final newCoinValue = calculatorUseCase.convertToUsd(
+    final newCoinValue = calculatorUseCase.convertToCoin(
       _priceModel!,
       newUsdValue,
     );
     emit(
-      CalculatorLoaded(
-        coinName: _priceModel!.coinModel.name,
+      CalculatorUpdated(
+        coin: _priceModel!.coinModel,
         valueInCoin: newCoinValue,
         valueInUsd: newUsdValue,
+        isCoinChanged: true,
       ),
     );
   }

@@ -14,7 +14,8 @@ class PriceListCubit extends Cubit<PriceListState> {
   final CoinUseCase coinUseCase;
   final PriceUseCase priceUseCase;
 
-  Future<void> load() async {
+  Future<void> load([bool isRefreshing = false]) async {
+    if (!isRefreshing) emit(PriceListLoading());
     final coinResponse = await coinUseCase.find();
     coinResponse.fold(
       (error) => emit(PriceListFailed(message: error)),
