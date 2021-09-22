@@ -26,7 +26,7 @@ class CalculatorCubit extends Cubit<CalculatorState> {
   }
 
   void onCoinValueChanged(String coinStringValue) {
-    final newCoinValue = double.tryParse(coinStringValue);
+    final newCoinValue = double.tryParse(coinStringValue.replaceAll(',', ''));
     if (newCoinValue == null) return;
     if (_priceModel == null) return;
     final newUsdValue = calculatorUseCase.convertToUsd(
@@ -44,7 +44,7 @@ class CalculatorCubit extends Cubit<CalculatorState> {
   }
 
   void onUsdValueChanged(String usdStringValue) {
-    final newUsdValue = double.tryParse(usdStringValue);
+    final newUsdValue = double.tryParse(usdStringValue.replaceAll(',', ''));
     if (newUsdValue == null) return;
     if (_priceModel == null) return;
     final newCoinValue = calculatorUseCase.convertToCoin(
