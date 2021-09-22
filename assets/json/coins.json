@@ -1,0 +1,27 @@
+[
+  {
+    "id": "bitcoin",
+    "symbol": "btc",
+    "name": "Bitcoin"
+  },
+  {
+    "id": "ethereum",
+    "symbol": "eth",
+    "name": "Ethereum"
+  },
+  {
+    "id": "tether",
+    "symbol": "usdt",
+    "name": "Tether"
+  },
+  {
+    "id": "binance-peg-cardano",
+    "symbol": "ada",
+    "name": "Binance-Peg Cardano"
+  },
+  {
+    "id": "binancecoin",
+    "symbol": "bnb",
+    "name": "Binance Coin"
+  }
+]
